@@ -39,5 +39,5 @@ adonis route:list
 
 7. Criando model
 
-adonis make:model File
+adonis make:model File -m -c
 
