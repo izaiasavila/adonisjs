@@ -41,3 +41,9 @@ adonis route:list
 
 adonis make:model File -m -c
 
+8. Criar um validador
+
+adonis install @adonisjs/validator
+adonis make:validator User
+adonis make:ehandler
+
