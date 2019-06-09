@@ -47,3 +47,6 @@ adonis install @adonisjs/validator
 adonis make:validator User
 adonis make:ehandler
 
+9. Internacionalização
+
+adonis install @adonisjs/antl
