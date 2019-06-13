@@ -8,7 +8,7 @@ npm install
 
 ### Start na aplicação
 
-adonis server --dev
+adonis serve --dev
 
 ### Comandos do AdonisJS
 
@@ -50,3 +50,12 @@ adonis make:ehandler
 9. Internacionalização
 
 adonis install @adonisjs/antl
+
+10. Criar seed
+
+adonis make:seed
+adonis seed
+
+11. Criação de Middleware
+
+adonis make:middleware Team

@@ -18,4 +18,10 @@ Route.group(() => {
   Route.resource('projects.tasks', 'TaskController')
     .apiOnly()
     .validator(new Map([[['projects.tasks.store'], ['Task']]]))
+
+  Route.resource('teams', 'TeamController').apiOnly()
 }).middleware(['auth'])
+
+Route.group(() => {
+  Route.post('invites', 'InviteController.store')
+}).middleware(['auth', 'team'])
