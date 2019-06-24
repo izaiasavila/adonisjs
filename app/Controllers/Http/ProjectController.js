@@ -10,9 +10,10 @@ class ProjectController {
    * Show a list of all projects.
    * GET projects
    */
-  async index ({ request }) {
+  async index({ request }) {
     const { page } = request.get()
     const projects = await Project.query()
+      .where('team_id', request.team.id)
       .with('user')
       .paginate(page)
     return projects
@@ -22,7 +23,7 @@ class ProjectController {
    * Create/save a new project.
    * POST projects
    */
-  async store ({ request, auth }) {
+  async store({ request, auth }) {
     const data = request.only(['title', 'description'])
     const project = await Project.create({ ...data, user_id: auth.user.id })
     return project
@@ -32,7 +33,7 @@ class ProjectController {
    * Display a single project.
    * GET projects/:id
    */
-  async show ({ params }) {
+  async show({ params }) {
     const project = await Project.findOrFail(params.id)
     await project.load('user')
     await project.load('tasks')
@@ -43,7 +44,7 @@ class ProjectController {
    * Update project details.
    * PUT or PATCH projects/:id
    */
-  async update ({ params, request }) {
+  async update({ params, request }) {
     const project = await Project.findOrFail(params.id)
     const data = request.only('title', 'description')
     project.merge(data)
@@ -55,7 +56,7 @@ class ProjectController {
    * Delete a project with id.
    * DELETE projects/:id
    */
-  async destroy ({ params }) {
+  async destroy({ params }) {
     const project = await Project.findOrFail(params.id)
     await project.delete()
   }
