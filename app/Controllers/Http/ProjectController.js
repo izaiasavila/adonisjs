@@ -10,10 +10,10 @@ class ProjectController {
    * Show a list of all projects.
    * GET projects
    */
-  async index({ request }) {
+  async index({ request, auth }) {
     const { page } = request.get()
     const projects = await Project.query()
-      .where('team_id', request.team.id)
+      .where('team_id', auth.user.currentTeam)
       .with('user')
       .paginate(page)
     return projects
@@ -25,7 +25,7 @@ class ProjectController {
    */
   async store({ request, auth }) {
     const data = request.only(['title', 'description'])
-    const project = await Project.create({ ...data, user_id: auth.user.id })
+    const project = await Project.create({ ...data, user_id: auth.user.id, team_id: auth.user.currentTeam })
     return project
   }
 
